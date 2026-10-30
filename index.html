@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Prasetyo Utomo — AI-Driven UI/UX, Developer & RPA">
+<meta property="og:description" content="Website perusahaan, HRIS, generator barcode FIFO, dan otomasi proses dengan AI Agent.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+<title>Prasetyo Utomo</title>
+<meta name="description" content="Prasetyo Utomo — AI-Driven UI/UX Designer, Developer & Robotic Process Automation. Website perusahaan, HRIS, generator barcode FIFO, dan otomasi proses dengan AI Agent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: animated 16:9 intro stage as the hero, then a scrolling site (about, project demos, services, contact) in the same navy/cream/orange language */
+:root{
+  --navy:#0E1320; --navy-2:#151C2C; --cream:#F2EEE6; --cream-2:#E7E1D6; --ink:#141823;
+  --orange:#E2714B; --blue:#4D6BFE; --mute-d:#5E6780; --mute-l:#8C8578;
+  --ok:#2F8F5B; --bad:#B42318;
+  --f-display:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--navy);color:var(--cream);font-family:var(--f-body)}
+body{overflow-x:hidden}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+/* ============ HERO / INTRO STAGE ============ */
+.hero{position:relative;height:min(100svh,56.25vw);min-height:220px;background:#06080D;overflow:hidden}
+.viewport{position:absolute;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;overflow:hidden;isolation:isolate;transform:translate(-50%,-50%);--hud:var(--mute-d);font-family:var(--f-body);-webkit-font-smoothing:antialiased}
+.bg{position:absolute;inset:0;background:var(--navy);z-index:0}
+.vig{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.glow{position:absolute;left:250px;top:-100px;width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(58,76,124,.42) 0%,rgba(58,76,124,.12) 40%,transparent 68%);will-change:transform}
+.layer{position:absolute;inset:0;z-index:4}
+.hide{visibility:hidden;opacity:0}
+.mono{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.14em}
+.ch{display:inline-block;will-change:transform;backface-visibility:hidden}
+.line{display:block;overflow:hidden;padding-top:.08em;margin-top:-.08em;padding-bottom:.04em;margin-bottom:-.04em}
+
+.hud{position:absolute;inset:0;z-index:10;pointer-events:none;font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--hud)}
+.hud>*{position:absolute}
+.hud .tl{left:40px;top:30px}.hud .tr{right:40px;top:30px}
+.hud .bl{left:40px;bottom:28px;font-variant-numeric:tabular-nums;display:flex;gap:18px}
+.hud .br{right:40px;bottom:22px;pointer-events:auto}
+.hud .bc{left:50%;bottom:20px;transform:translateX(-50%);display:flex;gap:6px;pointer-events:auto}
+.hud button,.hud a{font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;background:transparent;border:1px solid currentColor;border-radius:999px;padding:6px 14px;cursor:pointer;opacity:.75;transition:opacity .2s;text-decoration:none;display:inline-block}
+.hud button:hover,.hud a:hover{opacity:1}
+.hud button:focus-visible,.hud a:focus-visible{outline:2px solid var(--orange);outline-offset:2px;opacity:1}
+.prog{left:0;right:0;bottom:0;height:2px;background:var(--orange);transform-origin:0 50%;transform:scaleX(0)}
+.grain{position:absolute;inset:-60px;z-index:9;pointer-events:none;opacity:.07;background-size:180px 180px;animation:grain .9s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-22px,14px)}40%{transform:translate(18px,-26px)}60%{transform:translate(-12px,30px)}80%{transform:translate(28px,8px)}100%{transform:translate(0,0)}}
+
+.cur{position:absolute;left:0;top:0;z-index:8;pointer-events:none;will-change:transform}
+.cur svg{display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.ctag{position:absolute;left:20px;top:22px;font:600 13px/1 var(--f-body);color:#fff;background:var(--blue);padding:5px 8px;border-radius:5px;white-space:nowrap}
+#pen .ctag{background:var(--orange)}
+.ripple{position:absolute;left:0;top:0;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;border:2px solid var(--blue);z-index:8;pointer-events:none}
+
+#sHello{display:flex;align-items:center;justify-content:center}
+.hello{position:relative;font:900 230px/1 var(--f-display);letter-spacing:-.02em;color:var(--cream);will-change:transform}
+.hello .ghost{visibility:hidden}
+.hello .typed{position:absolute;left:0;top:0;white-space:nowrap}
+.tc{display:inline-block;animation:pop .42s cubic-bezier(.2,.9,.25,1.25) both}
+@keyframes pop{from{transform:translateY(22%) scale(.8);opacity:0}to{transform:none;opacity:1}}
+.hdot{display:inline-block;color:var(--orange)}
+.caret{display:inline-block;width:.045em;height:.74em;background:currentColor;margin-left:.04em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sel{position:absolute;inset:-6px -26px -10px -26px;border:1.5px solid rgba(226,113,75,.85);background:rgba(226,113,75,.10);z-index:-1}
+.sel i{position:absolute;width:10px;height:10px;background:var(--cream);border:1.5px solid var(--orange)}
+.sel i:nth-child(2){left:-6px;top:-6px}.sel i:nth-child(3){right:-6px;top:-6px}.sel i:nth-child(4){left:-6px;bottom:-6px}.sel i:nth-child(5){right:-6px;bottom:-6px}
+.sel-tag{position:absolute;left:-2px;top:-30px;font:500 12px/1 var(--f-mono);letter-spacing:.08em;color:var(--orange);white-space:nowrap}
+.sel-dim{position:absolute;right:-2px;bottom:-30px;font:500 12px/1 var(--f-mono);color:#fff;background:var(--orange);padding:4px 6px;border-radius:3px}
+
+#silWrap{position:absolute;left:440px;top:60px;width:720px;height:840px;z-index:2;will-change:transform}
+#silWrap svg{position:absolute;left:0;top:0;overflow:visible;display:block}
+#silOutline{fill:none;stroke:var(--orange);stroke-width:1.8;stroke-linejoin:round}
+#silFill{fill:var(--cream)}
+#silSoft{opacity:0;visibility:hidden;filter:blur(18px)}
+#silSoft path{fill:var(--cream)}
+.anchor{fill:var(--navy);stroke:var(--orange);stroke-width:1.4;opacity:0;transform:scale(0);transform-box:fill-box;transform-origin:center;transition:transform .45s cubic-bezier(.3,1.8,.5,1),opacity .2s}
+.anchor.on{opacity:1;transform:scale(1)}
+#handles line{stroke:var(--orange);stroke-width:1.2;opacity:.8}
+#handles circle{fill:var(--cream);stroke:var(--orange);stroke-width:1.2}
+.vec-label{position:absolute;left:110px;top:130px;z-index:5;font-family:var(--f-mono);font-size:14px;color:var(--cream);border:1px solid rgba(242,238,230,.18);background:rgba(14,19,32,.7);padding:12px 16px;border-radius:8px;display:grid;gap:7px;font-variant-numeric:tabular-nums}
+.vec-label .k{color:var(--orange)}
+.vec-label .s{color:var(--mute-d);font-size:12px}
+
+.blend{mix-blend-mode:difference;color:var(--cream)}
+.name-block{position:absolute;left:130px;top:250px;width:1340px}
+.im{font:900 52px/1 var(--f-display);margin-bottom:6px}
+.big{font:900 210px/.9 var(--f-display);letter-spacing:-.025em;white-space:nowrap}
+.name-block .l2{margin-left:330px}
+.name-sub{margin-top:26px;text-align:right;font-size:15px;letter-spacing:.32em}
+.roleA{position:absolute;left:0;right:0;top:220px;text-align:center}
+.roleA .big{font-size:220px}
+.roleB{position:absolute;left:120px;top:190px}
+.roleB .big{font-size:150px;line-height:.95}
+.o{color:var(--orange)}
+
+.ai-col{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;color:var(--ink);will-change:transform}
+.ai-label{font-size:14px;color:var(--mute-l)}
+.ai-row{display:flex;align-items:center;gap:26px;font-size:14px}
+.ai-row #offL{color:var(--ink)} .ai-row #onL{color:var(--mute-l)}
+.tog{width:180px;height:84px;border-radius:999px;background:var(--ink);position:relative;border:3px solid var(--ink)}
+.knob{position:absolute;left:4px;top:4px;width:70px;height:70px;border-radius:999px;background:var(--cream);transform-origin:50% 50%}
+.ai-word{font:800 240px/1 var(--f-display);letter-spacing:-.01em;-webkit-text-stroke:2.5px var(--ink);margin-top:20px}
+.ai-word .ch{color:rgba(20,24,35,0)}
+#iris{position:absolute;inset:0;z-index:7;background:var(--navy);clip-path:circle(0px at 50% 50%);pointer-events:none}
+
+.phrase{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-left:140px;gap:22px}
+.phrase .eyebrow{font-size:13px}
+.ptxt{font:300 112px/1.05 var(--f-display);letter-spacing:-.02em;white-space:nowrap}
+.ptxt .pl{display:inline-block;overflow:hidden;padding:.1em .05em .34em 0;margin:-.1em 0 -.34em}
+.ptxt b{font-weight:800}
+.sq-host{position:relative;display:inline-block}
+.sq{position:absolute;left:0;bottom:-14px;width:100%;height:22px;overflow:visible}
+.sq path{fill:none;stroke-width:4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.on-dark{color:var(--cream)} .on-dark .eyebrow{color:var(--mute-d)} .on-dark .sq path{stroke:var(--orange)}
+.on-cream{color:var(--ink)} .on-cream .eyebrow{color:var(--mute-l)} .on-cream .sq path{stroke:var(--blue)}
+
+.proc-label{position:absolute;left:120px;top:110px;font:500 36px/1 var(--f-body);color:var(--ink)}
+.proc-label::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;background:var(--orange);transform-origin:0 50%;transform:scaleX(var(--u,1))}
+.track{position:absolute;left:0;top:50%;display:flex;align-items:flex-end;transform-origin:0% 50%;will-change:transform}
+.step{position:relative;display:flex;flex-direction:column;align-items:center;gap:16px}
+.step .mono{font-size:15px;color:var(--mute-l)}
+.pill{font:900 72px/1 var(--f-display);letter-spacing:-.01em;color:var(--ink);border:4px solid var(--ink);border-radius:999px;padding:26px 56px;background:rgba(226,113,75,0);white-space:nowrap}
+.conn{width:210px;height:60px;margin-bottom:34px;overflow:visible;flex:none}
+.conn path{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.conn circle{fill:var(--blue)}
+
+.fin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--cream);text-align:center}
+.fin-name{font:900 132px/1 var(--f-display);letter-spacing:-.025em;white-space:nowrap;display:flex;align-items:baseline}
+.fin-name .dot{display:inline-block;color:var(--orange)}
+.fin-rule{width:980px;height:1px;background:rgba(242,238,230,.22);margin:34px 0 28px;transform-origin:50% 50%}
+.fin-role{font-size:17px;letter-spacing:.34em;color:var(--cream);white-space:nowrap}
+.fin-role b{color:var(--orange);font-weight:500}
+.fin-type{margin-top:30px;font:400 28px/1.3 var(--f-body);color:rgba(242,238,230,.78);min-height:1.3em}
+#cvSvg{position:absolute;inset:0;width:100%;height:100%;z-index:7;pointer-events:none}
+@media (prefers-reduced-motion: reduce){.caret,.grain{animation:none}}
+
+/* ============ SITE ============ */
+.nav{position:fixed;left:0;right:0;top:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:rgba(14,19,32,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(242,238,230,.08);transform:translateY(-110%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.nav.show{transform:none}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px max(20px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:24px}
+.brand{font:900 18px/1 var(--f-display);color:var(--cream);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.brand span{color:var(--orange)}
+.nav-links{display:flex;gap:22px;margin-left:auto;font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.nav-links a{color:rgba(242,238,230,.7);text-decoration:none}
+.nav-links a:hover{color:var(--cream)}
+@media (max-width:720px){.nav-links{display:none}.nav .btn{margin-left:auto}}
+
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section.sec{padding-block:clamp(72px,10vw,128px)}
+.sec.cream{background:var(--cream);color:var(--ink)}
+.eyebrow-s{font:500 12px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px}
+.eyebrow-s::before{content:"";width:28px;height:2px;background:currentColor}
+h2.h{font:800 clamp(38px,6vw,84px)/.98 var(--f-display);letter-spacing:-.03em;margin:18px 0 0;text-wrap:balance}
+h2.h em{font-style:normal;color:var(--orange)}
+.lead{font-size:clamp(17px,1.6vw,20px);line-height:1.6;max-width:62ch;margin:22px 0 0;color:inherit;opacity:.8}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 15px/1 var(--f-body);text-decoration:none;border-radius:999px;padding:14px 22px;border:2px solid transparent;cursor:pointer;transition:transform .2s,background .2s,color .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.btn-wa{background:var(--orange);color:var(--ink)}
+.btn-ghost{border-color:currentColor;color:inherit;background:transparent}
+.btn-sm{padding:9px 16px;font-size:13px}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* about */
+.about{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(40px,6vw,96px);align-items:start;margin-top:48px}
+.about p{font-size:18px;line-height:1.7;margin:0 0 18px;max-width:60ch}
+.about p strong{font-weight:600}
+.tl-list{list-style:none;margin:0;padding:0;border-left:2px solid var(--cream-2)}
+.tl-list li{position:relative;padding:0 0 26px 26px}
+.tl-list li::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--cream);border:2px solid var(--ink)}
+.tl-list li.now::before{background:var(--orange);border-color:var(--orange)}
+.tl-y{font:500 12px/1 var(--f-mono);letter-spacing:.14em;color:var(--mute-l);text-transform:uppercase}
+.tl-t{font:800 22px/1.2 var(--f-display);margin-top:8px}
+.tl-d{font-size:15px;color:#4A4A46;margin-top:4px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;border:1.5px solid currentColor}
+.cream .chip{color:var(--ink)}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+
+/* projects */
+.proj{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,64px);align-items:center;padding-block:clamp(48px,6vw,80px);border-top:1px solid rgba(242,238,230,.1)}
+.proj:first-of-type{border-top:0}
+.proj-info{min-width:0}
+.pnum{font:500 13px/1 var(--f-mono);letter-spacing:.16em;color:var(--mute-d)}
+.proj h3{font:800 clamp(30px,3.6vw,48px)/1.02 var(--f-display);letter-spacing:-.02em;margin:14px 0 0;text-wrap:balance}
+.proj p{font-size:17px;line-height:1.65;color:rgba(242,238,230,.75);margin:16px 0 0;max-width:52ch}
+.flow{display:grid;gap:10px;margin:22px 0 0;padding:0;list-style:none}
+.flow li{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:15px;line-height:1.5;color:rgba(242,238,230,.82)}
+.flow li span{font:500 11px/1.9 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.proj .chips .chip{color:rgba(242,238,230,.7)}
+.status{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin-left:12px;color:var(--orange)}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+@media (max-width:960px){.proj{grid-template-columns:1fr}}
+
+.win{background:var(--cream);color:var(--ink);border-radius:14px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(242,238,230,.08);min-width:0}
+.win-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--cream-2);font:500 11px/1 var(--f-mono);letter-spacing:.08em;color:var(--mute-l)}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:#D3CBBE}
+.win-bar i:first-child{background:#E2714B}
+.win-bar b{font-weight:500;margin-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.win-bar .demo-tag{margin-left:auto;color:var(--blue);white-space:nowrap}
+.win-body{padding:clamp(14px,2vw,22px)}
+.fld{display:grid;gap:5px;min-width:0}
+.fld label{font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l)}
+.fld input,.fld select{font:500 14px/1.2 var(--f-body);color:var(--ink);background:#fff;border:1.5px solid #D9D2C5;border-radius:8px;padding:9px 10px;width:100%;box-sizing:border-box;min-width:0}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(77,107,254,.18)}
+.dbtn{font:600 14px/1 var(--f-body);background:var(--ink);color:var(--cream);border:0;border-radius:8px;padding:11px 16px;cursor:pointer;transition:background .2s,transform .15s}
+.dbtn:hover{background:#000}
+.dbtn:active{transform:scale(.97)}
+.dbtn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.dbtn[disabled]{opacity:.5;cursor:default}
+.dbtn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+
+/* QC demo */
+.qc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.chat{display:flex;flex-direction:column;background:#fff;border:1.5px solid #E2DBCE;border-radius:12px;min-height:360px;overflow:hidden}
+.chat-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #EEE8DE;font:600 13px/1.2 var(--f-body)}
+.chat-head .av{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--orange);display:grid;place-items:center;font:900 12px/1 var(--f-display)}
+.chat-head small{display:block;font:400 11px/1.2 var(--f-body);color:var(--ok)}
+.chat-log{flex:1;padding:12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:260px;font-size:13px;line-height:1.45}
+.msg{max-width:88%;padding:8px 11px;border-radius:12px;white-space:pre-line;animation:msgIn .35s cubic-bezier(.2,.9,.3,1.1) both}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.msg.me{align-self:flex-end;background:var(--ink);color:var(--cream);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--cream-2);border-bottom-left-radius:4px}
+.msg .ok{color:var(--ok);font-weight:600}.msg .bad{color:var(--bad);font-weight:600}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:var(--mute-l);animation:td 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes td{50%{transform:translateY(-4px);opacity:.4}}
+.qc-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px 12px;border-top:1px solid #EEE8DE;background:#FBF9F5}
+.qc-form .full{grid-column:1/-1}
+.qc-out{display:flex;flex-direction:column;gap:12px;min-width:0}
+.label-can{position:relative;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:14px;overflow:hidden}
+.label-can .lc-top{display:flex;justify-content:space-between;align-items:center;font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l)}
+.label-can .lc-name{font:900 22px/1.05 var(--f-display);margin:8px 0 10px;letter-spacing:-.01em}
+.lc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12px}
+.lc-grid span{display:block;font:500 9.5px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute-l)}
+.lc-grid b{font-weight:600;font-variant-numeric:tabular-nums}
+.lc-bc{margin-top:10px;height:46px}
+.lc-bc svg{height:46px;width:100%;display:block}
+.stamp{position:absolute;right:12px;bottom:12px;font:900 18px/1 var(--f-display);letter-spacing:.06em;padding:6px 10px;border:3px solid currentColor;border-radius:6px;transform:rotate(-8deg);opacity:0;transition:opacity .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.stamp.on{opacity:.9;transform:rotate(-8deg) scale(1)}
+.stamp.pass{color:var(--ok)}.stamp.hold{color:var(--bad)}
+.print-q{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px}
+.print-q li{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #E2DBCE;border-radius:8px;padding:8px 10px;transition:border-color .3s}
+.print-q li .st{margin-left:auto;font:500 10.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute-l)}
+.print-q li.done{border-color:var(--ok)} .print-q li.done .st{color:var(--ok)}
+.print-q li.skip .st{color:var(--bad)}
+.bar{height:3px;background:#EEE8DE;border-radius:3px;overflow:hidden;width:60px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .5s linear}
+@media (max-width:640px){.qc{grid-template-columns:1fr}}
+
+/* barcode demo */
+.bc-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+@media (max-width:720px){.bc-form{grid-template-columns:repeat(2,minmax(0,1fr))}.bc-form .dbtn{grid-column:1/-1}}
+.bc-wrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;margin-top:16px}
+@media (max-width:720px){.bc-wrap{grid-template-columns:1fr}}
+.bc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;align-content:start;max-height:330px;overflow-y:auto;padding:2px}
+.bc-card{background:#fff;border:1.5px solid #E2DBCE;border-radius:8px;padding:8px 9px;animation:msgIn .4s cubic-bezier(.2,.9,.3,1.1) both}
+.bc-card svg{width:100%;height:40px;display:block}
+.bc-card .v{font:500 10px/1.3 var(--f-mono);letter-spacing:.04em;margin-top:4px;word-break:break-all}
+.bc-card .m{font-size:10.5px;color:var(--mute-l);margin-top:2px}
+.fifo{background:#fff;border:1.5px solid #E2DBCE;border-radius:10px;padding:12px;font-size:13px;min-width:0}
+.fifo h4{margin:0 0 10px;font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l)}
+.fifo ol{margin:0;padding:0;list-style:none;display:grid;gap:6px;max-height:280px;overflow-y:auto}
+.fifo li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:6px 8px;border-radius:6px;background:#FBF9F5}
+.fifo li b{font:600 11px/1.6 var(--f-mono);color:var(--mute-l)}
+.fifo li.next{background:rgba(226,113,75,.14);outline:1.5px solid var(--orange)}
+.fifo li.next b{color:var(--orange)}
+.fifo li small{display:block;color:var(--mute-l);font-size:11px}
+
+/* HRIS demo */
+.hr-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi{background:#fff;border:1.5px solid #E2DBCE;border-radius:10px;padding:10px 12px}
+.kpi span{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l)}
+.kpi b{display:block;font:800 28px/1.1 var(--f-display);margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi.k-ok b{color:var(--ok)}.kpi.k-warn b{color:var(--orange)}
+@media (max-width:560px){.hr-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hr-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;margin-top:12px}
+@media (max-width:720px){.hr-main{grid-template-columns:1fr}}
+.tbl-wrap{background:#fff;border:1.5px solid #E2DBCE;border-radius:10px;overflow-x:auto}
+table.hr{width:100%;border-collapse:collapse;font-size:13px;min-width:380px}
+table.hr th{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l);text-align:left;padding:10px;border-bottom:1px solid #EEE8DE}
+table.hr td{padding:8px 10px;border-bottom:1px solid #F3EEE5;white-space:nowrap}
+table.hr tr:last-child td{border-bottom:0}
+.badge{display:inline-block;font:600 11px/1 var(--f-body);padding:5px 8px;border-radius:999px}
+.b-hadir{background:rgba(47,143,91,.13);color:var(--ok)}
+.b-belum{background:rgba(140,133,120,.15);color:#6B655B}
+.b-cuti,.b-izin{background:rgba(226,113,75,.15);color:#B2512E}
+.mini{font:600 11px/1 var(--f-body);background:var(--ink);color:var(--cream);border:0;border-radius:6px;padding:6px 9px;cursor:pointer}
+.mini.alt{background:transparent;color:var(--ink);border:1.5px solid #CFC7B9}
+.mini:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.leave{background:#fff;border:1.5px solid #E2DBCE;border-radius:10px;padding:12px;display:grid;gap:10px;align-content:start}
+.leave h4{margin:0;font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-l)}
+.lv{border:1.5px solid #EEE8DE;border-radius:8px;padding:10px;font-size:13px}
+.lv b{display:block;font-weight:600}
+.lv small{color:var(--mute-l)}
+.lv .act{display:flex;gap:6px;margin-top:8px;align-items:center}
+.clock{font:500 11px/1 var(--f-mono);letter-spacing:.1em;color:var(--mute-l);text-transform:uppercase}
+
+/* company site demo */
+.cw-ctrl{display:flex;gap:6px;margin-bottom:12px}
+.cw-ctrl button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.cw-stage{background:#DCD5C8;border-radius:10px;padding:14px;display:flex;justify-content:center;overflow:hidden}
+.cw{width:100%;max-width:100%;background:#fff;border-radius:8px;overflow:hidden;transition:max-width .6s cubic-bezier(.7,0,.2,1);box-shadow:0 10px 30px -12px rgba(0,0,0,.3)}
+.cw.mobile{max-width:300px}
+.cw-nav{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid #eee;font-size:12px}
+.cw-nav b{font:900 14px/1 var(--f-display);color:#0B4F6C}
+.cw-nav .lk{display:flex;gap:12px;margin-left:auto;color:#555}
+.cw.mobile .cw-nav .lk{display:none}
+.cw-nav .hb{display:none;margin-left:auto;width:18px;height:12px;background:linear-gradient(#333 0 2px,transparent 2px 5px,#333 5px 7px,transparent 7px 10px,#333 10px 12px)}
+.cw.mobile .cw-nav .hb{display:block}
+.cw-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;padding:22px 16px;background:linear-gradient(135deg,#0B4F6C,#147A8F);color:#fff}
+.cw.mobile .cw-hero{grid-template-columns:1fr}
+.cw-hero h5{margin:0;font:800 24px/1.1 var(--f-display)}
+.cw-hero p{margin:8px 0 12px;font-size:12px;opacity:.85;line-height:1.5}
+.cw-hero .cta{display:inline-block;background:#F2B544;color:#1b1b1b;font:600 12px/1 var(--f-body);padding:8px 12px;border-radius:6px}
+.cw-hero .art{border-radius:8px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.12) 0 10px,rgba(255,255,255,.04) 10px 20px);min-height:90px;display:grid;place-items:center;font:500 10px/1 var(--f-mono);letter-spacing:.1em;opacity:.8}
+.cw-svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:16px}
+.cw.mobile .cw-svc{grid-template-columns:1fr}
+.cw-svc div{border:1px solid #eee;border-radius:8px;padding:10px;font-size:11.5px;color:#555;line-height:1.45}
+.cw-svc b{display:block;color:#0B4F6C;font-size:12.5px;margin-bottom:3px}
+.cw-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;background:#F5F7F8;font-size:11px;color:#666}
+.cw-foot .wa{background:#25D366;color:#fff;border-radius:999px;padding:6px 10px;font-weight:600}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;margin-top:48px;background:var(--cream-2);border:2px solid var(--cream-2);border-radius:18px;overflow:hidden}
+.svc-item{background:var(--cream);padding:clamp(22px,3vw,36px);display:grid;gap:12px;align-content:start;transition:background .3s}
+.svc-item:hover{background:#F7F4EE}
+.svc-item .n{font:500 12px/1 var(--f-mono);letter-spacing:.16em;color:var(--orange)}
+.svc-item h3{margin:0;font:800 clamp(22px,2.4vw,30px)/1.1 var(--f-display);letter-spacing:-.015em}
+.svc-item p{margin:0;font-size:16px;line-height:1.6;color:#4A4A46;max-width:48ch}
+@media (max-width:760px){.svc{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:end}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.c-list{display:grid;gap:2px;background:rgba(242,238,230,.1);border-radius:16px;overflow:hidden}
+.c-row{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--navy-2);padding:18px 20px}
+.c-row span{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute-d)}
+.c-row a,.c-row b{color:var(--cream);text-decoration:none;font:600 17px/1.3 var(--f-body);overflow-wrap:anywhere}
+.c-row a:hover{color:var(--orange)}
+.copy{font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;background:transparent;color:rgba(242,238,230,.7);border:1px solid rgba(242,238,230,.25);border-radius:999px;padding:7px 10px;cursor:pointer}
+.copy:hover{color:var(--cream);border-color:var(--cream)}
+.copy:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+@media (max-width:480px){.c-row{grid-template-columns:1fr auto}.c-row span{grid-column:1/-1}}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+footer{border-top:1px solid rgba(242,238,230,.08);padding-block:28px;font:500 12px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-d)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.reveal{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .reveal.pre{opacity:0;transform:translateY(36px)}
+.wa-float{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:40;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);transition:transform .25s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:28px;height:28px}
+.wa-float:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+</style>
+
+<nav class="nav" id="nav" aria-label="Navigasi utama">
+  <div class="nav-in">
+    <a class="brand" href="#intro">Prasetyo Utomo<span>.</span></a>
+    <div class="nav-links"><a href="#tentang">Tentang</a><a href="#proyek">Proyek</a><a href="#layanan">Layanan</a><a href="#kontak">Kontak</a></div>
+    <a class="btn btn-wa btn-sm" href="https://wa.me/6285719004019?text=Halo%20Prasetyo%2C%20saya%20lihat%20portofolio%20Anda%20dan%20ingin%20diskusi%20proyek." target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</nav>
+
+<header class="hero" id="intro">
+<div class="viewport">
+  <div id="stage" role="img" aria-label="Animasi intro: Prasetyo Utomo — AI-Driven UI/UX Designer, Developer and Robotic Process Automation. Dari ide menjadi pengalaman digital.">
+    <div class="bg" id="bg"></div>
+    <div class="vig" id="vig"><div class="glow" id="glow"></div></div>
+
+    <div id="silWrap" class="hide">
+      <svg id="silSoft" viewBox="0 0 600 700" width="720" height="840" aria-hidden="true"><path id="silSoftPath"></path></svg>
+      <svg id="silSharp" viewBox="0 0 600 700" width="720" height="840" aria-hidden="true">
+        <defs><clipPath id="silClip"><path id="silClipPath"></path></clipPath></defs>
+        <path id="silFill" clip-path="url(#silClip)" d=""></path>
+        <path id="silOutline" d=""></path>
+        <g id="anchors"></g>
+        <g id="handles" opacity="0"><line id="hl"></line><circle id="h1" r="4"></circle><circle id="h2" r="4"></circle></g>
+      </svg>
+    </div>
+
+    <div class="layer" id="sHello">
+      <div class="hello" id="hello">
+        <div class="sel hide" id="sel"><span class="sel-tag">Text · H1 · Archivo 900</span><i></i><i></i><i></i><i></i><span class="sel-dim">Hug × Hug</span></div>
+        <span class="ghost">HELLO.</span>
+        <span class="typed"><span id="helloText"></span><span class="hdot hide" id="hdot">.</span><span class="caret" id="hcaret"></span></span>
+      </div>
+    </div>
+
+    <div class="vec-label hide" id="vecLabel">
+      <div><span class="k">Vector</span> · prasetyo.svg</div>
+      <div class="s"><span id="ptCount">0</span> points · X <span id="px">0</span> · Y <span id="py">0</span></div>
+    </div>
+
+    <div class="layer blend hide" id="sName">
+      <div class="name-block">
+        <div class="im" id="nameIm">I'M</div>
+        <span class="line"><span class="big split" id="nl1">PRASETYO</span></span>
+        <span class="line l2"><span class="big split" id="nl2">UTOMO</span></span>
+        <div class="name-sub mono" id="nameSub">AI-Driven UI/UX · Developer · RPA</div>
+      </div>
+    </div>
+
+    <div class="layer blend hide" id="sRoleA">
+      <div class="roleA">
+        <span class="line"><span class="big split">UI/UX</span></span>
+        <span class="line"><span class="big split">DESIGNER.</span></span>
+      </div>
+    </div>
+    <div class="layer blend hide" id="sRoleB">
+      <div class="roleB" id="roleB">
+        <span class="line"><span class="big"><span class="split">UI</span><span class="o split">/</span><span class="split">UX DESIGNER,</span></span></span>
+        <span class="line"><span class="big split">DEVELOPER</span></span>
+        <span class="line"><span class="big"><span class="o split">&amp;</span><span class="split">&nbsp;RPA</span><span class="o split">.</span></span></span>
+      </div>
+    </div>
+
+    <div class="layer hide" id="sAI">
+      <div class="ai-col" id="aiCol">
+        <div class="ai-label mono" id="aiLabel">AI Mode</div>
+        <div class="ai-row mono" id="aiRow"><span id="offL">Off</span><div class="tog" id="tog"><div class="knob" id="knob"></div></div><span id="onL">On</span></div>
+        <span class="line"><span class="ai-word split" id="aiWord">AI-DRIVEN</span></span>
+      </div>
+    </div>
+
+    <div class="layer" id="sPhrase">
+      <div class="phrase on-dark hide" id="p1">
+        <div class="eyebrow mono">01 / 03 — Design</div>
+        <div class="ptxt"><span class="pl"><span class="sq-host"><span class="split">Designing</span><svg class="sq" viewBox="0 0 240 22" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 11 q10 -9 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t18 0"/></svg></span> <b class="split">experiences.</b></span></div>
+      </div>
+      <div class="phrase on-cream hide" id="p2">
+        <div class="eyebrow mono">02 / 03 — Develop</div>
+        <div class="ptxt"><span class="pl"><span class="sq-host"><span class="split">Building</span><svg class="sq" viewBox="0 0 240 22" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 11 q10 -9 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t18 0"/></svg></span> <b class="split">digital products.</b></span></div>
+      </div>
+      <div class="phrase on-dark hide" id="p3">
+        <div class="eyebrow mono">03 / 03 — Automate</div>
+        <div class="ptxt"><span class="pl"><span class="sq-host"><span class="split">Automating</span><svg class="sq" viewBox="0 0 240 22" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 11 q10 -9 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t18 0"/></svg></span> <b class="split">workflows.</b></span></div>
+      </div>
+    </div>
+
+    <div class="layer hide" id="sProc">
+      <div class="proc-label" id="procLabel">Process</div>
+      <div class="track" id="track">
+        <div class="step"><span class="mono">Step 01</span><div class="pill">UNDERSTAND</div></div>
+        <svg class="conn" viewBox="0 0 210 60" aria-hidden="true"><path pathLength="1" d="M8 30 C 40 30, 50 6, 80 14 S 120 54, 150 46 S 180 30, 196 30"/><circle cx="202" cy="30" r="6"/></svg>
+        <div class="step"><span class="mono">Step 02</span><div class="pill">DESIGN</div></div>
+        <svg class="conn" viewBox="0 0 210 60" aria-hidden="true"><path pathLength="1" d="M8 30 C 40 30, 50 6, 80 14 S 120 54, 150 46 S 180 30, 196 30"/><circle cx="202" cy="30" r="6"/></svg>
+        <div class="step"><span class="mono">Step 03</span><div class="pill">BUILD</div></div>
+        <svg class="conn" viewBox="0 0 210 60" aria-hidden="true"><path pathLength="1" d="M8 30 C 40 30, 50 6, 80 14 S 120 54, 150 46 S 180 30, 196 30"/><circle cx="202" cy="30" r="6"/></svg>
+        <div class="step"><span class="mono">Step 04</span><div class="pill">AUTOMATE</div></div>
+      </div>
+    </div>
+
+    <div class="layer hide" id="sFinal">
+      <div class="fin">
+        <div class="fin-name"><span class="line" style="display:inline-block"><span class="split">PRASETYO UTOMO</span></span><span class="dot" id="finDot">.</span></div>
+        <div class="fin-rule" id="finRule"></div>
+        <div class="fin-role mono" id="finRole"><b>AI-Driven</b> UI/UX Designer · Developer · RPA</div>
+        <div class="fin-type"><span id="finText"></span><span class="caret"></span></div>
+      </div>
+    </div>
+
+    <div id="iris"></div>
+    <svg id="cvSvg" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"><path id="cvPath" d=""></path></svg>
+
+    <div class="ripple hide" id="ripple"></div>
+    <div class="cur hide" id="cursor"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l7.2 19 2.7-7.7L21 10.6z" fill="#4D6BFE" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="ctag">Prasetyo</span></div>
+    <div class="cur hide" id="pen"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 1.5 L7 18 L11 13.5 L17 19.5 L19.5 17 L13.5 11 L18 7 Z" fill="#141823" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9.5" cy="9.5" r="1.6" fill="#fff"/></svg><span class="ctag">Pen · P</span></div>
+
+    <div class="grain" id="grain"></div>
+
+    <div class="hud">
+      <div class="tl">Prasetyo Utomo</div>
+      <div class="tr">AI-Driven UI/UX — Developer &amp; RPA</div>
+      <div class="bl"><span id="tc">00:00:00</span><span id="scn">01 / 10 · Hello</span></div>
+      <div class="bc"><button type="button" id="btnPlay" aria-label="Jeda animasi">❚❚ Jeda</button><button type="button" id="btnReplay" aria-label="Putar ulang dari awal">↺ Ulang</button></div>
+      <div class="br"><a href="#proyek">Lihat proyek ↓</a></div>
+      <div class="prog" id="prog"></div>
+    </div>
+  </div>
+</div>
+</header>
+
+<main>
+  <!-- ABOUT -->
+  <section class="sec cream" id="tentang">
+    <div class="wrap">
+      <div class="eyebrow-s reveal">Tentang saya</div>
+      <h2 class="h reveal">Paham proses lapangan,<br>lalu <em>mengotomasinya.</em></h2>
+      <div class="about">
+        <div class="reveal">
+          <p>Saya <strong>Prasetyo Utomo</strong>, AI-Driven UI/UX Designer, Developer, dan praktisi <strong>Robotic Process Automation (RPA)</strong>.</p>
+          <p>Sejak 2018 saya bekerja di industri tinta, mulai dari Quality Control, Technical Support, sampai Research &amp; Development. Dari situ saya tahu langsung pekerjaan mana yang paling banyak makan waktu: input data berulang, label yang dibuat satu per satu, dan laporan yang disalin manual.</p>
+          <p>Sejak September 2023 saya di bidang IT. Saya membangun website, sistem internal, dan otomasi dengan bantuan AI Agent, supaya tim bisa fokus ke pekerjaan yang benar-benar butuh manusia.</p>
+          <div class="chips"><span class="chip">UI/UX Design</span><span class="chip">Web Development</span><span class="chip">AI Agent</span><span class="chip">RPA</span><span class="chip">Excel Automation</span><span class="chip">CCTV &amp; Infrastruktur</span></div>
+        </div>
+        <ol class="tl-list reveal" aria-label="Perjalanan karier">
+          <li class="now"><div class="tl-y">Sep 2023 — Sekarang</div><div class="tl-t">IT</div><div class="tl-d">Website, sistem internal, otomasi proses dengan AI Agent.</div></li>
+          <li><div class="tl-y">2019 — 2023</div><div class="tl-t">Research &amp; Development · Ink</div><div class="tl-d">Pengembangan formula dan pengujian produk tinta.</div></li>
+          <li><div class="tl-y">2018 — 2019</div><div class="tl-t">Technical Support · Ink</div><div class="tl-d">Mendampingi pelanggan di lapangan.</div></li>
+          <li><div class="tl-y">2018 — 2019</div><div class="tl-t">Quality Control · Ink</div><div class="tl-d">Pengujian batch, COA, dan label produk.</div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="sec" id="proyek">
+    <div class="wrap">
+      <div class="eyebrow-s reveal">Proyek &amp; demo</div>
+      <h2 class="h reveal">Coba langsung,<br><em>bukan sekadar screenshot.</em></h2>
+      <p class="lead reveal">Setiap proyek di bawah punya demo interaktif yang berjalan di browser. Semua data di demo adalah data contoh.</p>
+
+      <!-- P1 QC -->
+      <article class="proj">
+        <div class="proj-info reveal">
+          <div class="pnum">01 · RPA + AI Agent <span class="status">Sedang berjalan</span></div>
+          <h3>Otomasi Label &amp; COA Quality Control</h3>
+          <p>Di lab QC pabrik tinta, hasil uji tiap batch diketik ke Excel, dibandingkan dengan standar, lalu label kaleng, label sampel, dan Certificate of Analysis dicetak manual.</p>
+          <ul class="flow">
+            <li><span>Masalah</span>Input berulang, rawan salah ketik, dan PC QC jarang dipegang staf.</li>
+            <li><span>Solusi</span>Staf cukup kirim data lewat chat. Bot membandingkan dengan STD DATA, lalu Excel mencetak label dan COA otomatis.</li>
+            <li><span>Berikutnya</span>AI Agent untuk input SPK produksi ke ERP berbasis web.</li>
+          </ul>
+          <div class="chips"><span class="chip">Excel</span><span class="chip">RPA</span><span class="chip">Chatbot</span><span class="chip">Auto-print</span></div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><b>qc-bot · label &amp; COA</b><span class="demo-tag">● Demo interaktif</span></div>
+          <div class="win-body qc">
+            <div class="chat">
+              <div class="chat-head"><div class="av">QC</div><div>QC Bot<small>● online</small></div></div>
+              <div class="chat-log" id="qcLog" aria-live="polite">
+                <div class="msg bot">Halo! Kirim hasil uji batch, nanti saya cek ke STD DATA dan cetak label + COA-nya.</div>
+              </div>
+              <form class="qc-form" id="qcForm">
+                <div class="fld full"><label for="qcProd">Produk</label><select id="qcProd"><option>PU Top Coat Clear</option><option>NC Lacquer Black</option><option>Epoxy Primer Grey</option></select></div>
+                <div class="fld"><label for="qcBatch">Batch</label><input id="qcBatch" value="TC-2610-07"></div>
+                <div class="fld"><label for="qcVisc">Viskositas (s)</label><input id="qcVisc" type="number" step="0.1" value="18.2"></div>
+                <div class="fld"><label for="qcGloss">Gloss 60°</label><input id="qcGloss" type="number" step="1" value="88"></div>
+                <div class="fld"><label for="qcDe">ΔE warna</label><input id="qcDe" type="number" step="0.1" value="0.6"></div>
+                <div class="fld"><label for="qcSolid">Solid (%)</label><input id="qcSolid" type="number" step="0.1" value="40.5"></div>
+                <div class="fld" style="align-self:end"><button class="dbtn" id="qcSend" type="submit">Kirim ke bot</button></div>
+              </form>
+            </div>
+            <div class="qc-out">
+              <div class="label-can" id="qcLabel">
+                <div class="lc-top"><span>Label kaleng · 20 kg</span><span>QC</span></div>
+                <div class="lc-name" id="lcName">PU Top Coat Clear</div>
+                <div class="lc-grid">
+                  <div><span>Batch</span><b id="lcBatch">—</b></div>
+                  <div><span>Netto</span><b>20 kg</b></div>
+                  <div><span>Produksi</span><b id="lcProd">—</b></div>
+                  <div><span>Kedaluwarsa</span><b id="lcExp">—</b></div>
+                </div>
+                <div class="lc-bc"><svg id="lcBc" aria-label="Barcode batch"></svg></div>
+                <div class="stamp" id="lcStamp">QC PASS</div>
+              </div>
+              <ul class="print-q" id="qcQueue">
+                <li data-k="can">Label kaleng 20 kg<span class="bar"><i></i></span><span class="st">Menunggu</span></li>
+                <li data-k="smp">Label sampel 200 gr<span class="bar"><i></i></span><span class="st">Menunggu</span></li>
+                <li data-k="coa">Certificate of Analysis<span class="bar"><i></i></span><span class="st">Menunggu</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- P2 Barcode -->
+      <article class="proj">
+        <div class="proj-info reveal">
+          <div class="pnum">02 · Web App + AI Agent</div>
+          <h3>Generator Barcode untuk FIFO Gudang</h3>
+          <p>Website untuk membuat barcode sekaligus dalam jumlah banyak, lengkap dengan tanggal masuk, supaya barang yang masuk lebih dulu juga keluar lebih dulu.</p>
+          <ul class="flow">
+            <li><span>Masalah</span>Barcode dibuat satu per satu, urutan FIFO sulit dilacak.</li>
+            <li><span>Solusi</span>Isi kode, tanggal, dan jumlah, lalu semua label langsung jadi dengan nomor urut dan antrian FIFO.</li>
+          </ul>
+          <div class="chips"><span class="chip">Code 128</span><span class="chip">Batch print</span><span class="chip">FIFO</span></div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><b>barcode-fifo · generator</b><span class="demo-tag">● Demo interaktif</span></div>
+          <div class="win-body">
+            <form class="bc-form" id="bcForm">
+              <div class="fld"><label for="bcCode">Kode barang</label><input id="bcCode" value="INK-PU-001"></div>
+              <div class="fld"><label for="bcDate">Tanggal masuk</label><input id="bcDate" type="date"></div>
+              <div class="fld"><label for="bcQty">Jumlah</label><input id="bcQty" type="number" min="1" max="24" value="6"></div>
+              <div class="fld"><label for="bcRack">Rak</label><input id="bcRack" value="A-03"></div>
+              <button class="dbtn" type="submit">Generate</button>
+            </form>
+            <div class="bc-wrap">
+              <div class="bc-grid" id="bcGrid" aria-live="polite"></div>
+              <div class="fifo"><h4>Antrian FIFO</h4><ol id="fifoList"></ol></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- P3 HRIS -->
+      <article class="proj">
+        <div class="proj-info reveal">
+          <div class="pnum">03 · Web App + AI Agent</div>
+          <h3>HRIS: Absensi &amp; Cuti Karyawan</h3>
+          <p>Sistem HR berbasis web untuk absensi harian, data karyawan, dan pengajuan cuti, dibangun dengan bantuan AI Agent.</p>
+          <ul class="flow">
+            <li><span>Masalah</span>Rekap absensi dan cuti masih lewat kertas dan chat.</li>
+            <li><span>Solusi</span>Satu dashboard: absen masuk, status kehadiran real-time, dan persetujuan cuti sekali klik.</li>
+          </ul>
+          <div class="chips"><span class="chip">Dashboard</span><span class="chip">Absensi</span><span class="chip">Approval</span></div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><b>hris · dashboard hari ini</b><span class="demo-tag">● Demo interaktif</span></div>
+          <div class="win-body">
+            <div class="hr-kpi" id="hrKpi"></div>
+            <div class="hr-main">
+              <div class="tbl-wrap"><table class="hr"><thead><tr><th>Karyawan</th><th>Divisi</th><th>Status</th><th>Jam</th></tr></thead><tbody id="hrBody"></tbody></table></div>
+              <div class="leave"><h4>Pengajuan cuti</h4><div id="hrLeave"></div><div class="clock" id="hrClock"></div></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- P4 Company website -->
+      <article class="proj">
+        <div class="proj-info reveal">
+          <div class="pnum">04 · Website + AI Agent</div>
+          <h3>Website Company Profile</h3>
+          <p>Website perusahaan yang responsif, cepat, dan langsung terhubung ke WhatsApp. Desain dan kode dikerjakan bersama AI Agent sehingga waktu pengerjaan lebih singkat.</p>
+          <ul class="flow">
+            <li><span>Hasil</span>Tampil rapi di desktop dan HP, dengan tombol kontak yang selalu terlihat.</li>
+          </ul>
+          <div class="chips"><span class="chip">Responsive</span><span class="chip">SEO dasar</span><span class="chip">WhatsApp CTA</span></div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><b>company-profile · contoh desain</b><span class="demo-tag">● Demo interaktif</span></div>
+          <div class="win-body">
+            <div class="cw-ctrl" role="group" aria-label="Ukuran layar"><button class="mini alt" type="button" data-cw="desktop" aria-pressed="true">Desktop</button><button class="mini alt" type="button" data-cw="mobile" aria-pressed="false">Mobile</button></div>
+            <div class="cw-stage">
+              <div class="cw" id="cw">
+                <div class="cw-nav"><b>NUSA KEMAS</b><span class="lk"><span>Beranda</span><span>Produk</span><span>Tentang</span><span>Kontak</span></span><span class="hb"></span></div>
+                <div class="cw-hero"><div><h5>Kemasan industri yang tepat waktu.</h5><p>Produsen kemasan kaleng dan pail untuk industri cat, tinta, dan kimia. (Perusahaan fiktif untuk contoh.)</p><span class="cta">Minta penawaran</span></div><div class="art">FOTO PRODUK</div></div>
+                <div class="cw-svc"><div><b>Kaleng 1–5 L</b>Custom cetak logo.</div><div><b>Pail 20 L</b>Tutup segel aman.</div><div><b>Pengiriman</b>Jabodetabek &amp; Jawa.</div></div>
+                <div class="cw-foot"><span>© Nusa Kemas</span><span class="wa">WhatsApp</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="sec cream" id="layanan">
+    <div class="wrap">
+      <div class="eyebrow-s reveal">Layanan</div>
+      <h2 class="h reveal">Yang bisa saya kerjakan<br>untuk <em>tim Anda.</em></h2>
+      <div class="svc reveal">
+        <div class="svc-item"><div class="n">01</div><h3>Website perusahaan</h3><p>Company profile dan landing page yang responsif, dibangun cepat dengan AI Agent, siap dipakai untuk promosi.</p></div>
+        <div class="svc-item"><div class="n">02</div><h3>HRIS &amp; sistem internal</h3><p>Absensi, data karyawan, cuti, dan dashboard yang disesuaikan dengan alur kerja perusahaan Anda.</p></div>
+        <div class="svc-item"><div class="n">03</div><h3>Otomasi proses (RPA)</h3><p>Input data berulang, cetak label dan dokumen, serta laporan Excel yang berjalan sendiri.</p></div>
+        <div class="svc-item"><div class="n">04</div><h3>Barcode &amp; FIFO gudang</h3><p>Generator barcode massal tanpa input satu per satu, dengan urutan FIFO yang jelas.</p></div>
+        <div class="svc-item"><div class="n">05</div><h3>Instalasi CCTV</h3><p>Pemasangan CCTV perusahaan end-to-end, dari survei sampai siap pakai.</p></div>
+        <div class="svc-item"><div class="n">06</div><h3>Desain UI/UX</h3><p>Rancangan tampilan aplikasi dan website yang mudah dipakai, dari wireframe sampai prototipe.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="kontak">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow-s reveal">Kontak</div>
+        <h2 class="h reveal">Punya proses yang bisa <em>diotomasi?</em></h2>
+        <p class="lead reveal">Ceritakan alur kerja Anda. Saya bantu cari bagian yang bisa dibuat lebih cepat dengan website, sistem, atau otomasi.</p>
+        <div class="cta-row reveal">
+          <a class="btn btn-wa" href="https://wa.me/6285719004019?text=Halo%20Prasetyo%2C%20saya%20lihat%20portofolio%20Anda%20dan%20ingin%20diskusi%20proyek." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>Chat via WhatsApp</a>
+          <a class="btn btn-ghost" href="#proyek">Lihat proyek</a>
+        </div>
+      </div>
+      <div class="c-list reveal">
+        <div class="c-row"><span>WhatsApp</span><a href="https://wa.me/6285719004019" target="_blank" rel="noopener">+62 857-1900-4019</a><button class="copy" type="button" data-copy="+6285719004019">Salin</button></div>
+        <div class="c-row"><span>Email</span><b>prasetyo.utomo44@gmail.com</b><button class="copy" type="button" data-copy="prasetyo.utomo44@gmail.com">Salin</button></div>
+        <div class="c-row"><span>GitHub</span><a href="https://github.com/Prasetyo44" target="_blank" rel="noopener">github.com/Prasetyo44</a><span></span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Prasetyo Utomo</span><span>AI-Driven UI/UX · Developer · RPA</span></div></footer>
+
+<a class="wa-float" href="https://wa.me/6285719004019?text=Halo%20Prasetyo%2C%20saya%20lihat%20portofolio%20Anda." target="_blank" rel="noopener" aria-label="Chat WhatsApp dengan Prasetyo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+<script>
+/* ===================== INTRO ===================== */
+(function(){
+  const $ = s => document.querySelector(s);
+  const stage = $('#stage'), vp = $('.viewport'), hero = $('#intro');
+  const NAVY='#0E1320', CREAM='#F2EEE6', INK='#141823', ORANGE='#E2714B', MUTE_D='#5E6780', MUTE_L='#8C8578';
+  let S = 1;
+  function fit(){
+    S = Math.min(vp.clientWidth/1600, vp.clientHeight/900);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + S + ')';
+  }
+  fit(); addEventListener('resize', fit);
+
+  try {
+    const c = document.createElement('canvas'); c.width = c.height = 180;
+    const x = c.getContext('2d'), im = x.createImageData(180, 180);
+    for (let i = 0; i < im.data.length; i += 4){ const v = Math.random()*255; im.data[i]=im.data[i+1]=im.data[i+2]=v; im.data[i+3]=255; }
+    x.putImageData(im, 0, 0);
+    $('#grain').style.backgroundImage = 'url(' + c.toDataURL() + ')';
+  } catch(e){}
+
+  function split(el){
+    const out = [];
+    [...el.childNodes].forEach(n => {
+      if (n.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        for (const c of n.textContent){
+          const s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = (c === ' ' || c === ' ') ? ' ' : c;
+          frag.appendChild(s); out.push(s);
+        }
+        n.replaceWith(frag);
+      }
+    });
+    return out;
+  }
+  stage.querySelectorAll('.split').forEach(e => { e.__chars = split(e); });
+  const chars = el => [...el.querySelectorAll('.split')].flatMap(e => e.__chars);
+
+  /* silhouette traced from Prasetyo's photo */
+  const START = [-10, 720];
+  const SEG = [[-2.6,669.0,5.6,473.2,34.6,413.7],[63.6,354.2,134.0,380.1,164.2,362.7],[194.4,345.3,209.0,323.8,215.7,309.4],[222.4,295.0,208.1,282.5,204.2,276.5],[200.3,270.5,196.8,276.4,192.5,273.3],[188.2,270.2,182.9,266.2,178.7,258.0],[174.5,249.8,168.4,233.5,167.2,224.2],[166.0,214.9,167.4,206.8,171.6,202.2],[175.8,197.6,191.8,213.0,192.2,196.6],[192.6,180.2,176.5,121.2,173.9,104.0],[171.3,86.8,173.6,98.3,176.8,93.7],[180.0,89.1,186.4,80.8,193.2,76.6],[200.0,72.4,212.4,72.8,217.7,68.3],[223.0,63.8,218.8,55.5,224.7,49.9],[230.6,44.3,241.4,38.4,253.2,34.8],[265.0,31.2,280.9,27.7,295.3,28.0],[309.7,28.3,327.5,33.0,339.7,36.6],[351.9,40.2,358.9,43.2,368.5,49.7],[378.1,56.2,389.9,66.6,397.5,75.8],[405.1,85.0,410.2,94.1,414.2,105.0],[418.2,115.9,422.9,125.2,421.5,141.3],[420.1,157.4,404.8,190.8,405.6,201.5],[406.4,212.2,422.1,201.6,426.5,205.5],[430.9,209.4,433.7,215.1,432.0,224.8],[430.3,234.5,421.0,255.2,416.5,263.9],[412.0,272.6,408.6,274.8,404.9,277.3],[401.2,279.8,397.7,272.8,394.2,278.6],[390.7,284.4,379.6,299.1,383.9,312.2],[388.2,325.3,401.8,345.2,420.2,357.0],[438.6,368.8,469.8,372.1,494.3,383.0],[518.8,393.9,547.7,366.3,567.0,422.5],[586.3,478.7,602.8,670.4,610,720]];
+  const segStr = s => `C ${s[0]} ${s[1]}, ${s[2]} ${s[3]}, ${s[4]} ${s[5]}`;
+  const NS = 'http://www.w3.org/2000/svg';
+  const outline = $('#silOutline'), anchorsG = $('#anchors'), fillPath = $('#silFill');
+  let d = `M ${START[0]} ${START[1]}`;
+  const anchorLens = [], anchorEls = [];
+  const tmp = document.createElementNS(NS, 'path');
+  $('#silSharp').appendChild(tmp);
+  const addAnchor = (x, y, len) => {
+    const r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', x-4); r.setAttribute('y', y-4); r.setAttribute('width', 8); r.setAttribute('height', 8);
+    r.setAttribute('class', 'anchor'); anchorsG.appendChild(r);
+    anchorEls.push(r); anchorLens.push(len);
+  };
+  addAnchor(START[0], START[1], 0);
+  SEG.forEach(s => { d += ' ' + segStr(s); tmp.setAttribute('d', d); addAnchor(s[4], s[5], tmp.getTotalLength()); });
+  tmp.remove();
+  d += ' Z';
+  outline.setAttribute('d', d); $('#silClipPath').setAttribute('d', d); $('#silSoftPath').setAttribute('d', d);
+  const OL = outline.getTotalLength();
+  const TOTAL = anchorLens[anchorLens.length-1];
+  outline.style.strokeDasharray = OL;
+  outline.style.strokeDashoffset = OL;
+  const SIL_X = 440, SIL_Y = 60, K = 1.2;
+
+  const helloText = $('#helloText'), ptCount = $('#ptCount'), finText = $('#finText'), pen = $('#pen'), cv = $('#cvPath');
+  const hl = $('#hl'), h1 = $('#h1'), h2 = $('#h2');
+  const FIN_COPY = 'Dari ide menjadi pengalaman digital.';
+
+  function setTyped(n){
+    while (helloText.children.length < n){ const s = document.createElement('span'); s.className = 'tc'; s.textContent = 'HELLO'[helloText.children.length]; helloText.appendChild(s); }
+    while (helloText.children.length > n){ helloText.lastChild.remove(); }
+  }
+  function drawFill(p){
+    if (p <= 0){ fillPath.setAttribute('d', ''); return; }
+    const y = 760 - p*820, a = 16*Math.sin(Math.PI*Math.min(p,1)), ph = p*Math.PI*5;
+    let s = `M -40 800 L -40 ${y.toFixed(1)}`; const N = 8, w = 680/N;
+    for (let i = 0; i < N; i++){ const x0 = -40 + i*w; s += ` Q ${(x0+w/2).toFixed(1)} ${(y + (i%2 ? 1 : -1)*a*Math.cos(ph)).toFixed(1)} ${(x0+w).toFixed(1)} ${y.toFixed(1)}`; }
+    fillPath.setAttribute('d', s + ' L 640 800 Z');
+  }
+  function reset(){
+    setTyped(0);
+    finText.textContent = '';
+    ptCount.textContent = '0';
+    outline.style.strokeDashoffset = OL;
+    anchorEls.forEach(a => a.classList.remove('on'));
+    drawFill(0);
+    cv.setAttribute('d', '');
+  }
+  function stagePos(el, fx, fy){
+    const r = el.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    return { x: (r.left + r.width*fx - sr.left)/S, y: (r.top + r.height*fy - sr.top)/S };
+  }
+
+  const SCENES = [[0,'Hello'],[2.9,'Vector'],[5.6,'Name'],[8.4,'Role'],[12.2,'AI Mode'],[15.25,'Design'],[17.65,'Develop'],[20.05,'Automate'],[22.45,'Process'],[28.7,'Prasetyo Utomo']];
+
+  function build(){
+    fit();
+    const selT = stagePos($('#hello'), 1, 1);
+    const togT = stagePos($('#knob'), .5, .55);
+    const tl = gsap.timeline({ paused:true, onComplete(){ reset(); tl.restart(); } });
+    const cursor = $('#cursor'), ripple = $('#ripple');
+
+    const theme = (t, dark, dur) => {
+      tl.to(stage, {'--hud': dark ? MUTE_D : MUTE_L, duration: dur || .01}, t);
+      tl.set('#bg', {backgroundColor: dark ? NAVY : CREAM}, t + (dur || 0));
+      tl.set('#vig', {autoAlpha: dark ? 1 : 0}, t + (dur || 0));
+    };
+    const curtain = (t, dir, color, dur) => {
+      dur = dur || .85;
+      const pr = {p:0};
+      tl.to(pr, {p:1, duration:dur, ease:'power3.inOut', onUpdate(){
+        const p = pr.p, b = 300*Math.sin(Math.PI*p);
+        const y = dir === 'up' ? 900*(1-p) : 900*p;
+        cv.setAttribute('fill', color);
+        cv.setAttribute('d', dir === 'up'
+          ? `M0 900 L0 ${y} Q800 ${y-b} 1600 ${y} L1600 900 Z`
+          : `M0 0 L0 ${y} Q800 ${y+b} 1600 ${y} L1600 0 Z`);
+      }}, t);
+      tl.call(() => cv.setAttribute('d', ''), null, t + dur + .03);
+      theme(t, color === NAVY, dur);
+    };
+    const arc = (el, a, b, t, dur, bend) => {
+      const pr = {p:0}, mx = (a.x+b.x)/2, my = (a.y+b.y)/2, dx = b.x-a.x, dy = b.y-a.y, L = Math.hypot(dx,dy) || 1;
+      const cx = mx - dy/L*bend, cy = my + dx/L*bend;
+      tl.to(pr, {p:1, duration:dur, ease:'power3.inOut', onUpdate(){
+        const p = pr.p, q = 1-p;
+        gsap.set(el, {x: q*q*a.x + 2*q*p*cx + p*p*b.x, y: q*q*a.y + 2*q*p*cy + p*p*b.y, rotation: -8*Math.sin(Math.PI*p)});
+      }}, t);
+    };
+    const click = (t, pos) => {
+      tl.to(cursor, {scale:.8, duration:.09, yoyo:true, repeat:1, ease:'power2.out'}, t);
+      tl.fromTo(ripple, {x:pos.x, y:pos.y, scale:.1, autoAlpha:.9}, {scale:1.4, autoAlpha:0, duration:.7, ease:'power2.out', immediateRender:false}, t+.05);
+    };
+    const rise = (els, t, o) => tl.from(els, Object.assign({yPercent:115, rotation:6, transformOrigin:'0% 100%', duration:1, ease:'expo.out', stagger:.035}, o||{}), t);
+    const leave = (els, t, o) => tl.to(els, Object.assign({yPercent:-115, rotation:-4, duration:.5, ease:'power3.in', stagger:.012}, o||{}), t);
+
+    gsap.to('#glow', {x:180, y:120, duration:7, ease:'sine.inOut', yoyo:true, repeat:-1});
+
+    const ty = {n:0};
+    tl.to(ty, {n:5, duration:1.05, ease:'none', onUpdate(){ setTyped(Math.round(ty.n)); }}, .4);
+    tl.fromTo('#hdot', {autoAlpha:0, scale:0, y:-60}, {autoAlpha:1, scale:1, y:0, duration:.6, ease:'bounce.out', transformOrigin:'50% 85%'}, 1.45);
+    tl.to('#hcaret', {autoAlpha:0, duration:.15}, 1.75);
+    tl.fromTo('#sel', {autoAlpha:0, scale:.92}, {autoAlpha:1, scale:1, duration:.5, ease:'expo.out'}, 1.8);
+    tl.set(cursor, {autoAlpha:1}, 1.5);
+    arc(cursor, {x:1360, y:820}, {x:selT.x+30, y:selT.y+12}, 1.5, .9, 120);
+    click(2.45, {x:selT.x+30, y:selT.y+12});
+    tl.to('#hello', {yPercent:-18, scale:.94, autoAlpha:0, duration:.55, ease:'power3.in'}, 2.75);
+    tl.to(cursor, {autoAlpha:0, duration:.25}, 2.75);
+
+    tl.fromTo('#vecLabel', {autoAlpha:0, x:-24}, {autoAlpha:1, x:0, duration:.6, ease:'expo.out'}, 2.95);
+    tl.set('#silWrap', {autoAlpha:1}, 2.95);
+    tl.fromTo(pen, {autoAlpha:0, scale:.6}, {autoAlpha:1, scale:1, duration:.3, ease:'back.out(2)'}, 2.95);
+    tl.to('#handles', {attr:{opacity:1}, duration:.2}, 3.0);
+    const pp = {p:0}, pxEl = $('#px'), pyEl = $('#py');
+    tl.to(pp, {p:1, duration:2.5, ease:'sine.inOut', onUpdate(){
+      const len = pp.p * TOTAL;
+      outline.style.strokeDashoffset = OL - len;
+      const pt = outline.getPointAtLength(len), a = outline.getPointAtLength(Math.max(0,len-2)), b = outline.getPointAtLength(Math.min(TOTAL,len+2));
+      let dx = b.x-a.x, dy = b.y-a.y; const L = Math.hypot(dx,dy) || 1; dx = dx/L*34; dy = dy/L*34;
+      hl.setAttribute('x1', pt.x-dx); hl.setAttribute('y1', pt.y-dy); hl.setAttribute('x2', pt.x+dx); hl.setAttribute('y2', pt.y+dy);
+      h1.setAttribute('cx', pt.x-dx); h1.setAttribute('cy', pt.y-dy); h2.setAttribute('cx', pt.x+dx); h2.setAttribute('cy', pt.y+dy);
+      gsap.set(pen, {x: SIL_X + pt.x*K, y: SIL_Y + pt.y*K});
+      let c = 0;
+      anchorLens.forEach((l, i) => { const on = l <= len + .5; anchorEls[i].classList.toggle('on', on); if (on) c++; });
+      ptCount.textContent = c; pxEl.textContent = Math.round(pt.x); pyEl.textContent = Math.round(pt.y);
+    }}, 3.05);
+    tl.to('#handles', {attr:{opacity:0}, duration:.25}, 5.5);
+    tl.to(['#vecLabel', pen], {autoAlpha:0, duration:.3}, 5.55);
+    tl.to('#anchors', {autoAlpha:0, duration:.35}, 5.55);
+
+    const fp = {p:0};
+    tl.to(fp, {p:1, duration:1.1, ease:'power2.inOut', onUpdate(){ drawFill(fp.p); }}, 5.5);
+    tl.to(outline, {strokeOpacity:0, duration:.6}, 6.0);
+    tl.to('#silWrap', {scale:1.04, duration:2.6, ease:'sine.inOut', transformOrigin:'50% 100%'}, 5.6);
+    const n1 = chars($('#nl1').parentNode), n2 = chars($('#nl2').parentNode);
+    tl.set('#sName', {autoAlpha:1}, 5.85);
+    tl.from('#nameIm', {autoAlpha:0, y:24, duration:.7, ease:'expo.out'}, 5.85);
+    rise(n1, 5.9);
+    rise(n2, 6.12);
+    tl.from('#nameSub', {autoAlpha:0, letterSpacing:'.9em', duration:1.2, ease:'expo.out'}, 6.55);
+    leave([...n1, ...n2], 7.95);
+    tl.to(['#nameIm', '#nameSub'], {autoAlpha:0, y:-16, duration:.4, ease:'power2.in'}, 7.95);
+    tl.set('#sName', {autoAlpha:0}, 8.6);
+
+    const ra = chars($('#sRoleA')), rb = chars($('#sRoleB'));
+    tl.set('#sRoleA', {autoAlpha:1}, 8.4);
+    rise(ra, 8.4, {stagger:.03});
+    leave(ra, 9.6);
+    tl.to('#silWrap', {x:440, scale:1.16, duration:1.3, ease:'expo.inOut'}, 9.55);
+    tl.set('#silSoft', {visibility:'visible'}, 9.55);
+    tl.to('#silSoft', {opacity:1, duration:.9, ease:'power2.inOut'}, 9.75);
+    tl.to('#silSharp', {opacity:0, duration:.9, ease:'power2.inOut'}, 9.75);
+    tl.set('#sRoleA', {autoAlpha:0}, 10.2);
+    tl.set('#sRoleB', {autoAlpha:1}, 10.05);
+    rise(rb, 10.05, {stagger:.018});
+    tl.to('#roleB', {y:-70, duration:1.1, ease:'power3.in'}, 11.25);
+
+    curtain(11.35, 'up', CREAM, .85);
+    tl.set(['#sRoleB', '#silWrap'], {autoAlpha:0}, 12.2);
+
+    const aw = chars($('#sAI'));
+    tl.set('#sAI', {autoAlpha:1}, 12.2);
+    tl.from(['#aiLabel', '#aiRow'], {autoAlpha:0, y:30, duration:.8, stagger:.08, ease:'expo.out'}, 12.15);
+    rise(aw, 12.25, {stagger:.04});
+    tl.set(cursor, {autoAlpha:1}, 12.55);
+    arc(cursor, {x:1300, y:840}, togT, 12.55, .9, -140);
+    click(13.45, togT);
+    tl.to('#knob', {keyframes:[{scaleX:1.3, duration:.14, ease:'power2.out'}, {x:96, scaleX:1, duration:.42, ease:'expo.out'}]}, 13.5);
+    tl.to('#tog', {backgroundColor:ORANGE, borderColor:ORANGE, duration:.35}, 13.55);
+    tl.to('#onL', {color:INK, duration:.3}, 13.55);
+    tl.to('#offL', {color:MUTE_L, duration:.3}, 13.55);
+    tl.to(aw, {color:INK, duration:.35, stagger:.045, ease:'power2.out'}, 13.65);
+    tl.to(cursor, {autoAlpha:0, duration:.25}, 14.2);
+
+    tl.fromTo('#iris', {clipPath:`circle(0px at ${togT.x}px ${togT.y}px)`}, {clipPath:`circle(1900px at ${togT.x}px ${togT.y}px)`, duration:1.0, ease:'power3.inOut', immediateRender:false}, 14.25);
+    tl.to('#aiCol', {scale:.92, duration:1.0, ease:'power3.inOut'}, 14.25);
+    theme(14.25, true, 1.0);
+    tl.set('#sAI', {autoAlpha:0}, 15.25);
+    tl.set('#iris', {clipPath:`circle(0px at ${togT.x}px ${togT.y}px)`}, 15.27);
+
+    const phrase = (id, t, out) => {
+      const el = $(id), cs = chars(el);
+      tl.set(el, {autoAlpha:1}, t);
+      tl.from(el.querySelector('.eyebrow'), {autoAlpha:0, y:12, duration:.6, ease:'expo.out'}, t);
+      rise(cs, t+.05, {stagger:.022, duration:.95});
+      tl.to(el.querySelector('.sq path'), {strokeDashoffset:0, duration:.7, ease:'power2.inOut'}, t+.55);
+      if (out){
+        leave(cs, out, {stagger:.008, duration:.45});
+        tl.to(el.querySelector('.eyebrow'), {autoAlpha:0, y:-10, duration:.3}, out);
+        tl.to(el.querySelector('.sq path'), {strokeDashoffset:-1, duration:.45, ease:'power2.in'}, out);
+      }
+    };
+    phrase('#p1', 15.25, 16.65);
+    curtain(16.8, 'up', CREAM, .85);  tl.set('#p1', {autoAlpha:0}, 17.65);
+    phrase('#p2', 17.65, 19.05);
+    curtain(19.2, 'down', NAVY, .85); tl.set('#p2', {autoAlpha:0}, 20.05);
+    phrase('#p3', 20.05, 21.45);
+    curtain(21.6, 'up', CREAM, .85);  tl.set('#p3', {autoAlpha:0}, 22.45);
+
+    const track = $('#track'), steps = [...track.querySelectorAll('.step')], pills = steps.map(s => s.querySelector('.pill')), labs = steps.map(s => s.querySelector('.mono'));
+    const conns = [...track.querySelectorAll('.conn path')], dots = [...track.querySelectorAll('.conn circle')];
+    const cx = i => 800 - (steps[i].offsetLeft + pills[i].offsetLeft + pills[i].offsetWidth/2);
+    const W = track.scrollWidth, fitS = 1400 / W, fitX = 800 - W*fitS/2;
+    gsap.set(track, {yPercent:-50, x:cx(0)});
+    gsap.set(dots, {attr:{r:0}});
+    tl.set('#sProc', {autoAlpha:1}, 22.4);
+    tl.from('#procLabel', {autoAlpha:0, y:14, duration:.7, ease:'expo.out'}, 22.45);
+    tl.fromTo('#procLabel', {'--u':0}, {'--u':1, duration:.7, ease:'expo.inOut'}, 22.6);
+    tl.fromTo(track, {x:cx(0)+640, autoAlpha:0}, {x:cx(0), autoAlpha:1, duration:1.1, ease:'expo.out', immediateRender:false}, 22.45);
+    const act = (i, t, on) => {
+      tl.to(pills[i], {backgroundColor: on ? 'rgba(226,113,75,1)' : 'rgba(226,113,75,0)', duration:.4, ease:'power2.out'}, t);
+      tl.to(labs[i], {color: on ? ORANGE : MUTE_L, duration:.4}, t);
+      if (on) tl.fromTo(pills[i], {scale:1}, {scale:1.07, duration:.22, yoyo:true, repeat:1, ease:'power2.out', immediateRender:false}, t);
+    };
+    act(0, 22.95, true);
+    for (let i = 1; i < 4; i++){
+      const t = 22.95 + i*1.0;
+      tl.to(conns[i-1], {strokeDashoffset:0, duration:.6, ease:'power2.inOut'}, t-.6);
+      tl.to(dots[i-1], {attr:{r:6}, duration:.35, ease:'back.out(3)'}, t-.05);
+      tl.to(track, {x:cx(i), duration:.85, ease:'power3.inOut'}, t-.55);
+      act(i-1, t, false); act(i, t, true);
+    }
+    tl.to(track, {x:fitX, scale:fitS, duration:1.2, ease:'expo.inOut'}, 26.35);
+
+    curtain(27.85, 'down', NAVY, .85);
+    tl.set('#sProc', {autoAlpha:0}, 28.7);
+
+    const fc = chars($('#sFinal'));
+    tl.set('#sFinal', {autoAlpha:1}, 28.7);
+    rise(fc, 28.75, {stagger:.032, duration:1.1});
+    tl.from('#finDot', {y:-320, autoAlpha:0, duration:1.0, ease:'bounce.out'}, 29.35);
+    tl.from('#finRule', {scaleX:0, duration:1.0, ease:'expo.inOut'}, 29.5);
+    tl.from('#finRole', {autoAlpha:0, letterSpacing:'.9em', duration:1.3, ease:'expo.out'}, 29.75);
+    const ft = {n:0};
+    tl.to(ft, {n:FIN_COPY.length, duration:1.9, ease:'none', onUpdate(){ finText.textContent = FIN_COPY.slice(0, Math.round(ft.n)); }}, 30.4);
+    tl.to('#sFinal', {autoAlpha:0, y:-20, duration:.7, ease:'power2.in'}, 36.4);
+    tl.to({}, {duration:.4}, 37.1);
+    return tl;
+  }
+
+  function fmt(t){
+    const p = n => String(n).padStart(2, '0');
+    return p(Math.floor(t/60)) + ':' + p(Math.floor(t % 60)) + ':' + p(Math.floor((t % 1) * 24));
+  }
+
+  function start(){
+    if (!window.gsap) return;
+    reset();
+    const tl = build();
+    const tc = $('#tc'), scn = $('#scn'), prog = $('#prog'), btnPlay = $('#btnPlay'), btnReplay = $('#btnReplay');
+    const D = tl.duration();
+    let last = -1, userPaused = false, inView = true;
+    gsap.ticker.add(() => {
+      if (!inView) return;
+      const t = tl.time();
+      tc.textContent = fmt(t);
+      prog.style.transform = 'scaleX(' + (t / D).toFixed(4) + ')';
+      let i = 0; while (i < SCENES.length - 1 && t >= SCENES[i+1][0]) i++;
+      if (i !== last){ last = i; scn.textContent = String(i+1).padStart(2,'0') + ' / ' + String(SCENES.length).padStart(2,'0') + ' · ' + SCENES[i][1]; }
+    });
+    const setBtn = () => {
+      btnPlay.textContent = tl.paused() ? '▶ Putar' : '❚❚ Jeda';
+      btnPlay.setAttribute('aria-label', tl.paused() ? 'Putar animasi' : 'Jeda animasi');
+    };
+    btnPlay.addEventListener('click', () => { userPaused = !tl.paused(); tl.paused(userPaused); setBtn(); });
+    btnReplay.addEventListener('click', () => { userPaused = false; reset(); tl.restart(); setBtn(); });
+    gsap.ticker.lagSmoothing(500, 33);
+
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(es => {
+        inView = es[0].isIntersecting;
+        if (!inView) tl.pause(); else if (!userPaused && !reduce) tl.resume();
+      }, {threshold:.05}).observe(hero);
+    }
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce){
+      tl.seek(34, false).pause();
+      finText.textContent = FIN_COPY;
+      userPaused = true; setBtn();
+    } else {
+      tl.play();
+    }
+    window.__tl = tl;
+  }
+
+  const ready = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2500))]) : Promise.resolve();
+  ready.then(start);
+})();
+
+/* ===================== SITE ===================== */
+(function(){
+  const $ = s => document.querySelector(s);
+  document.documentElement.classList.add('js');
+
+  /* nav appears after the hero */
+  const nav = $('#nav'), hero = $('#intro');
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => nav.classList.toggle('show', !es[0].isIntersecting), {threshold:.25}).observe(hero);
+    /* reveal on scroll, from a visible resting state */
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top > innerHeight){ el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  /* copy buttons */
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
+    const v = b.dataset.copy, done = () => { const o = b.textContent; b.textContent = 'Tersalin'; setTimeout(() => b.textContent = o, 1500); };
+    try { navigator.clipboard.writeText(v).then(done, () => { selectNear(b); }); } catch(e){ selectNear(b); }
+  }));
+  function selectNear(b){ const t = b.previousElementSibling; if (!t) return; const r = document.createRange(); r.selectNodeContents(t); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  const bc = (svg, value, opts) => {
+    try { if (window.JsBarcode) JsBarcode(svg, value, Object.assign({format:'CODE128', displayValue:false, margin:0, height:40, width:1.3, lineColor:'#141823', background:'transparent'}, opts||{})); } catch(e){}
+  };
+  const pad = n => String(n).padStart(2, '0');
+  const MON = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const fmtD = d => pad(d.getDate()) + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear();
+
+  /* ---------- QC demo ---------- */
+  const SPEC = [
+    {k:'qcVisc', n:'Viskositas', u:' s', min:16, max:20},
+    {k:'qcGloss', n:'Gloss 60°', u:' GU', min:85, max:null},
+    {k:'qcDe', n:'ΔE warna', u:'', min:null, max:1.0},
+    {k:'qcSolid', n:'Solid', u:'%', min:38, max:42}
+  ];
+  const log = $('#qcLog'), send = $('#qcSend'), queue = [...document.querySelectorAll('#qcQueue li')];
+  const addMsg = (cls, html) => { const m = document.createElement('div'); m.className = 'msg ' + cls; m.innerHTML = html; log.appendChild(m); log.scrollTop = log.scrollHeight; return m; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function renderLabel(prod, batch, pass){
+    const now = new Date(), exp = new Date(now); exp.setMonth(exp.getMonth() + 12);
+    $('#lcName').textContent = prod; $('#lcBatch').textContent = batch;
+    $('#lcProd').textContent = fmtD(now); $('#lcExp').textContent = fmtD(exp);
+    bc($('#lcBc'), batch || 'BATCH', {height:46, width:1.6});
+    const st = $('#lcStamp'); st.classList.remove('on','pass','hold');
+    void st.offsetWidth;
+    st.textContent = pass ? 'QC PASS' : 'HOLD'; st.classList.add(pass ? 'pass' : 'hold', 'on');
+  }
+  function resetQueue(){ queue.forEach(li => { li.className = ''; li.querySelector('.bar i').style.width = '0'; li.querySelector('.st').textContent = 'Menunggu'; }); }
+  renderLabel('PU Top Coat Clear', 'TC-2610-07', true); $('#lcStamp').classList.remove('on');
+  $('#qcForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const prod = $('#qcProd').value, batch = ($('#qcBatch').value || '').trim().toUpperCase() || 'TANPA-BATCH';
+    const vals = SPEC.map(s => ({...s, v: parseFloat($('#' + s.k).value)}));
+    send.disabled = true; resetQueue();
+    addMsg('me', esc(batch) + ' · ' + esc(prod) + '\n' + vals.map(v => v.n + ' ' + (isNaN(v.v) ? '-' : v.v) + v.u).join(' · '));
+    setTimeout(() => {
+      const t = addMsg('bot', '<span class="typing"><i></i><i></i><i></i></span>');
+      setTimeout(() => {
+        const res = vals.map(v => {
+          const ok = !isNaN(v.v) && (v.min === null || v.v >= v.min) && (v.max === null || v.v <= v.max);
+          const range = v.min !== null && v.max !== null ? v.min + '–' + v.max : v.min !== null ? '≥ ' + v.min : '≤ ' + v.max;
+          return {ok, line: (ok ? '<span class="ok">✓</span> ' : '<span class="bad">✗</span> ') + v.n + ' ' + (isNaN(v.v) ? '-' : v.v) + v.u + ' <small>(std ' + range + ')</small>', n:v.n};
+        });
+        const pass = res.every(r => r.ok);
+        t.innerHTML = 'Cek ke STD DATA:\n' + res.map(r => r.line).join('\n') + '\n\n' + (pass
+          ? '<span class="ok">Semua sesuai standar.</span> Mencetak label dan COA…'
+          : '<span class="bad">Batch ditahan.</span> ' + res.filter(r => !r.ok).map(r => r.n).join(', ') + ' di luar standar. Label tidak dicetak.');
+        log.scrollTop = log.scrollHeight;
+        renderLabel(prod, batch, pass);
+        if (!pass){ queue.forEach(li => { li.classList.add('skip'); li.querySelector('.st').textContent = 'Ditahan'; }); send.disabled = false; return; }
+        queue.forEach((li, i) => {
+          setTimeout(() => { li.querySelector('.st').textContent = 'Mencetak'; li.querySelector('.bar i').style.width = '100%'; }, 300 + i*650);
+          setTimeout(() => { li.classList.add('done'); li.querySelector('.st').textContent = 'Selesai ✓'; if (i === queue.length-1){ addMsg('bot', 'Selesai. Silakan ambil 1 label kaleng, 1 label sampel, dan COA di printer QC.'); send.disabled = false; } }, 820 + i*650);
+        });
+      }, 900);
+    }, 350);
+  });
+
+  /* ---------- Barcode FIFO demo ---------- */
+  const bcDate = $('#bcDate'), grid = $('#bcGrid'), fifoList = $('#fifoList');
+  const today = new Date();
+  bcDate.value = today.getFullYear() + '-' + pad(today.getMonth()+1) + '-' + pad(today.getDate());
+  const batches = [];
+  const seed = (code, daysAgo, qty, rack) => { const d = new Date(today); d.setDate(d.getDate() - daysAgo); batches.push({code, date:d, qty, rack}); };
+  seed('INK-NC-014', 9, 12, 'B-01'); seed('INK-EP-007', 4, 8, 'A-05');
+  function renderFifo(){
+    batches.sort((a, b) => a.date - b.date);
+    fifoList.innerHTML = batches.map((b, i) => `<li class="${i === 0 ? 'next' : ''}"><b>${pad(i+1)}</b><div>${esc(b.code)} · ${b.qty} pcs${i === 0 ? ' · <strong>keluar berikutnya</strong>' : ''}<small>Masuk ${fmtD(b.date)} · Rak ${esc(b.rack)}</small></div></li>`).join('');
+  }
+  function generate(){
+    const code = ($('#bcCode').value || 'ITEM').trim().toUpperCase().replace(/\s+/g, '-').slice(0, 20);
+    const qty = Math.max(1, Math.min(24, parseInt($('#bcQty').value, 10) || 1));
+    const rack = ($('#bcRack').value || '-').trim().toUpperCase();
+    const d = bcDate.value ? new Date(bcDate.value + 'T00:00:00') : new Date();
+    const ymd = String(d.getFullYear()).slice(2) + pad(d.getMonth()+1) + pad(d.getDate());
+    grid.innerHTML = '';
+    for (let i = 1; i <= qty; i++){
+      const val = code + '-' + ymd + '-' + String(i).padStart(3, '0');
+      const card = document.createElement('div'); card.className = 'bc-card'; card.style.animationDelay = (i-1)*40 + 'ms';
+      card.innerHTML = `<svg aria-label="Barcode ${esc(val)}"></svg><div class="v">${esc(val)}</div><div class="m">Masuk ${fmtD(d)} · Rak ${esc(rack)}</div>`;
+      grid.appendChild(card); bc(card.querySelector('svg'), val);
+    }
+    batches.push({code, date:d, qty, rack}); renderFifo();
+  }
+  $('#bcForm').addEventListener('submit', e => { e.preventDefault(); generate(); });
+  generate();
+
+  /* ---------- HRIS demo ---------- */
+  const emp = [
+    {n:'Andi Saputra', d:'Produksi', s:'belum'}, {n:'Siti Rahmawati', d:'QC', s:'hadir', t:'07:52'},
+    {n:'Budi Santoso', d:'Gudang', s:'hadir', t:'07:41'}, {n:'Dewi Lestari', d:'HRD', s:'cuti'},
+    {n:'Rizky Pratama', d:'IT', s:'hadir', t:'07:58'}, {n:'Nur Aisyah', d:'Produksi', s:'belum'},
+    {n:'Fajar Nugroho', d:'Produksi', s:'hadir', t:'07:35'}, {n:'Maya Anggraini', d:'Finance', s:'belum'}
+  ];
+  const leaves = [
+    {n:'Maya Anggraini', r:'Izin sakit · hari ini', today:true, st:'pending'},
+    {n:'Andi Saputra', r:'Cuti tahunan · 3 hari, minggu depan', today:false, st:'pending'}
+  ];
+  const LBL = {hadir:'Hadir', belum:'Belum absen', cuti:'Cuti', izin:'Izin'};
+  function renderHR(){
+    const c = k => emp.filter(e => e.s === k).length;
+    $('#hrKpi').innerHTML = `<div class="kpi"><span>Karyawan</span><b>${emp.length}</b></div><div class="kpi k-ok"><span>Hadir</span><b>${c('hadir')}</b></div><div class="kpi k-warn"><span>Belum absen</span><b>${c('belum')}</b></div><div class="kpi"><span>Cuti / izin</span><b>${c('cuti') + c('izin')}</b></div>`;
+    $('#hrBody').innerHTML = emp.map((e, i) => `<tr><td>${e.n}</td><td>${e.d}</td><td><span class="badge b-${e.s}">${LBL[e.s]}</span></td><td>${e.s === 'belum' ? `<button class="mini" type="button" data-in="${i}">Absen</button>` : (e.t || '—')}</td></tr>`).join('');
+    $('#hrLeave').innerHTML = leaves.map((l, i) => `<div class="lv"><b>${l.n}</b><small>${l.r}</small><div class="act">${l.st === 'pending' ? `<button class="mini" type="button" data-ok="${i}">Setujui</button><button class="mini alt" type="button" data-no="${i}">Tolak</button>` : `<span class="badge ${l.st === 'ok' ? 'b-hadir' : 'b-izin'}">${l.st === 'ok' ? 'Disetujui' : 'Ditolak'}</span>`}</div></div>`).join('');
+  }
+  document.querySelector('.hr-main').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const now = new Date(), hm = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    if (b.dataset.in){ const p = emp[+b.dataset.in]; p.s = 'hadir'; p.t = hm; }
+    if (b.dataset.ok){ const l = leaves[+b.dataset.ok]; l.st = 'ok'; if (l.today){ const p = emp.find(x => x.n === l.n); if (p){ p.s = 'izin'; p.t = '—'; } } }
+    if (b.dataset.no){ leaves[+b.dataset.no].st = 'no'; }
+    renderHR();
+  });
+  const tick = () => { const n = new Date(); $('#hrClock').textContent = 'Jam server · ' + pad(n.getHours()) + ':' + pad(n.getMinutes()) + ':' + pad(n.getSeconds()); };
+  renderHR(); tick(); setInterval(tick, 1000);
+
+  /* ---------- Company site demo ---------- */
+  document.querySelectorAll('[data-cw]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-cw]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    $('#cw').classList.toggle('mobile', b.dataset.cw === 'mobile');
+  }));
+})();
+</script>
+
+</html>
